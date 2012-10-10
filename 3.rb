@@ -8,6 +8,7 @@ def is_this_prime(number)
       puts "Prime failed because #{number} is divisible by #{tester}"
       return false
     else
+
       tester -= 1
     end
   end
@@ -24,20 +25,22 @@ def is_this_common_multiple(number)
   end
 end
 
+def is_this_a_multiple_of(tester, bignumber)
+  bignumber % tester == 0
+end
 
 def find_lowest_prime_multiple(number)
-  no_result_yet = true
+  original = number #store the factor being tested against
+  number = number / 2 #no large prime multiples could be larger than half the number
+  no_result_yet = true #get the loop started
   while no_result_yet == true
-    if number < 14
+    if is_this_a_multiple_of(number, original) && !is_this_common_multiple(number) && is_this_prime(number)
       no_result_yet = false
       puts "Congrats, your prime is #{number}"
-    elsif is_this_common_multiple(number) == false
-      if is_this_prime(number)
-        no_result_yet = false
-        puts "Congrats, your prime is #{number}"
-      end
+    elsif number < 14
+      no_result_yet = false
+      puts "Congrats, your prime is #{number}"
     else
-      puts "This is a common multiple"
       number -= 1
     end
   end
