@@ -37,10 +37,7 @@ def find_lowest_prime_multiple(number)
   number = number / 2 #no large prime multiples could be larger than half the number
   no_result_yet = true #get the loop started
   while no_result_yet == true
-    if is_this_a_multiple_of(number, original) && is_this_prime(number) && !is_this_common_multiple(number)
-      no_result_yet = false
-      puts "Congrats, your prime is #{number}"
-    elsif number < 14
+    if (is_this_a_multiple_of(number, original) && is_this_prime(number) && !is_this_common_multiple(number)) || number < 14 #tested for common primes to 13
       no_result_yet = false
       puts "Congrats, your prime is #{number}"
     else
