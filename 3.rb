@@ -1,3 +1,7 @@
+# The prime factors of 13195 are 5, 7, 13 and 29.
+
+# What is the largest prime factor of the number 600851475143 ?
+
 def is_this_prime(number) 
   puts "#{number} is starting prime test...."
   tester = Math.sqrt(number).to_i
@@ -8,7 +12,6 @@ def is_this_prime(number)
       puts "Prime failed because #{number} is divisible by #{tester}"
       return false
     else
-
       tester -= 1
     end
   end
@@ -34,7 +37,7 @@ def find_lowest_prime_multiple(number)
   number = number / 2 #no large prime multiples could be larger than half the number
   no_result_yet = true #get the loop started
   while no_result_yet == true
-    if is_this_a_multiple_of(number, original) && !is_this_common_multiple(number) && is_this_prime(number)
+    if is_this_a_multiple_of(number, original) && is_this_prime(number) && !is_this_common_multiple(number)
       no_result_yet = false
       puts "Congrats, your prime is #{number}"
     elsif number < 14
@@ -42,6 +45,10 @@ def find_lowest_prime_multiple(number)
       puts "Congrats, your prime is #{number}"
     else
       number -= 1
+      while !is_this_common_multiple(number)
+        number -=1
+      end
+      puts "tests on #{number} start now"
     end
   end
 end
