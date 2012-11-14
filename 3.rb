@@ -26,11 +26,7 @@ def prime_number?(number)
       prime_tester += 1
     end
   end
-  if might_be_prime
-    true
-  else
-    false
-  end
+  return might_be_prime
 end
 
 prime_factors?(600851475143)
