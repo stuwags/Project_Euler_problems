@@ -29,9 +29,28 @@ def organize_crazy_array
   @crazy_array = multi_dimensional_array
 end
 
-def run_da_horizontal_test
-  2.times do |iterator|
+def run_da_vertical_test
+  20.times do |iterator|
     first_num = 0
+    while (first_num + 3) <= (@crazy_array.length-1)
+      product = 1
+      for i in first_num..(first_num + 3)
+        product *= @crazy_array[i][iterator].to_i
+      end
+      @biggest_product_yet ||= product
+      if product > @biggest_product_yet
+        @biggest_product_yet = product
+      end
+      first_num +=1
+    end
+  end
+  return @biggest_product_yet
+end
+
+def run_da_horizontal_test
+  @biggest_product_yet = 0
+  20.times do |iterator|
+    first_num = 0;
     while (first_num + 3) <= (@crazy_array[iterator].length-1)
       product = 1
       for i in first_num..(first_num + 3)
@@ -44,9 +63,53 @@ def run_da_horizontal_test
       first_num +=1
     end
   end
+  return @biggest_product_yet
 end
 
+def run_da_diagonal_right_test
+  @biggest_product_yet = 0
+  17.times do |iterator|
+    first_num = 0
+    while (first_num + 3) <= (@crazy_array[iterator].length-1)
+      product = 1; diagonaler = 0
+      for i in first_num..(first_num + 3)
+        product *= @crazy_array[iterator + diagonaler][i].to_i
+        diagonaler += 1
+      end
+      @biggest_product_yet ||= product
+      if product > @biggest_product_yet
+        @biggest_product_yet = product
+      end
+      first_num +=1
+    end
+  end
+  return @biggest_product_yet
+end
+
+def run_da_diagonal_left_test
+  @biggest_product_yet = 0
+  17.times do |iterator|
+    first_num = 0
+    while (first_num+3) <= (@crazy_array[iterator].length-1)
+      product = 1; diagonaler = 3
+      for i in first_num..(first_num + 3)
+        product *= @crazy_array[iterator + diagonaler][i].to_i
+        diagonaler -= 1
+      end
+      @biggest_product_yet ||= product
+      if product > @biggest_product_yet
+        @biggest_product_yet = product
+      end
+      first_num +=1
+    end
+  end
+  return @biggest_product_yet
+end
+
+
 organize_crazy_array
-run_da_horizontal_test
-# run_da_vertical_test
-# run_da_diagonal_test
+puts "My result from horizontal test is #{run_da_horizontal_test}"
+puts "My result from vertical test is #{run_da_vertical_test}"
+puts "My result from vertical test is #{run_da_diagonal_right_test}"
+puts "My result from vertical test is #{run_da_diagonal_left_test}"
+# run_da _diagonal_test_left
