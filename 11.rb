@@ -1,4 +1,4 @@
-crazy_array = %w(08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+@crazy_array = %w(08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -19,10 +19,34 @@ crazy_array = %w(08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48)
 
-multi_dimensional_array = []
 @start = 0
-20.times do |count|
-  multi_dimensional_array[count] = crazy_array[@start..(@start+19)]
-  @start += 20
+def organize_crazy_array
+  multi_dimensional_array = []
+  20.times do |count|
+    multi_dimensional_array[count] = @crazy_array[@start..(@start+19)]
+    @start += 20
+  end
+  @crazy_array = multi_dimensional_array
 end
-puts multi_dimensional_array.length
+
+def run_da_horizontal_test
+  2.times do |iterator|
+    first_num = 0
+    while (first_num + 3) <= (@crazy_array[iterator].length-1)
+      product = 1
+      for i in first_num..(first_num + 3)
+        product *= @crazy_array[iterator][i].to_i
+      end
+      @biggest_product_yet ||= product
+      if product > @biggest_product_yet
+        @biggest_product_yet = product
+      end
+      first_num +=1
+    end
+  end
+end
+
+organize_crazy_array
+run_da_horizontal_test
+# run_da_vertical_test
+# run_da_diagonal_test
